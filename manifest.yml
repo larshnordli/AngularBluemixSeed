@@ -1,5 +1,5 @@
 applications:
-- disk_quota: 1024M
+- disk_quota: 128M
   name: angularbluemixseed
   path: dist/
   domain: mybluemix.net
