@@ -58,8 +58,13 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+	  'karma-junit-reporter'
     ],
+	reporters: ['junit'],
+junitReporter : {
+  outputFile: '../test/reports/unit-tests.xml'
+},
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
