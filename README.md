@@ -10,3 +10,6 @@ Run `grunt` for building and `grunt serve` for preview.
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+
+
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://hub.jazz.net/git/anderslangseth/angularBluemixSeed)
