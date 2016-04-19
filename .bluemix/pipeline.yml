@@ -1,0 +1,123 @@
+---
+stages:
+- name: Build
+  inputs:
+  - type: git
+    branch: master
+  triggers:
+  - type: commit
+  jobs:
+  - name: Build
+    type: builder
+    artifact_dir: ''
+    build_type: grunt
+    script: |-
+      export PATH=/opt/IBM/node-v4.2/bin:$PATH
+      npm install
+      npm -g install bower
+      bower install
+      grunt build
+- name: Run Unit Test
+  inputs:
+  - type: job
+    stage: Build
+    job: Build
+  triggers:
+  - type: stage
+  jobs:
+  - name: Linting and Unit Tests
+    type: tester
+    script: |-
+      npm install
+      grunt test:dist
+    enable_tests: true
+    test_file_pattern: test/reports/unit-tests.xml
+- name: Active Deploy
+  inputs:
+  - type: job
+    stage: Build
+    job: Build
+  triggers:
+  - type: stage
+  properties:
+  - name: NAME
+    value: ''
+    type: text
+  - name: GROUP_SIZE
+    value: '1'
+    type: text
+  - name: TEST_RESULT_FOR_AD
+    value: ''
+    type: text
+  - name: APP_NAME
+    value: ${CF_APP}
+    type: text
+  - name: SAUCE_USERNAME
+    value: ${SAUCE_USER}
+    type: text
+  - name: SAUCE_ACCESS_KEY
+    value: ${SAUCE_KEY}
+    type: text
+  jobs:
+  - name: Deploy Single Instance
+    type: deployer
+    target:
+      region_id: ibm:yp:us-south
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
+      application: ${CF_APP}
+    script: |
+      #!/bin/bash
+      NAME="${CF_APP}_${BUILD_NUMBER}"
+      cf push "${NAME}" --no-route -i 1 -m 64M
+      export NAME
+      printenv NAME
+  - name: Begin Active Deploy
+    type: deployer
+    extension_id: ibm.devops.services.pipeline.devops.ad_start
+    target:
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
+    RAMPDOWN_DURATION: 1m
+    RAMPUP_DURATION: 1m
+    COMMAND: |-
+      #!/bin/bash
+      source ${EXT_DIR}/git_util.sh
+      git_retry clone https://github.com/Osthanes/update_service.git activedeploy
+      activedeploy/activedeploy_step_1.sh
+  - name: Test
+    type: tester
+    script: |-
+      #!/bin/bash
+      set -x
+
+      # Start by checking if a previous test failed. If so, quit now.
+      # Make sure exit code is 0 (success).
+      if [[ -n ${TEST_RESULT_FOR_AD} ]] && (( ${TEST_RESULT_FOR_AD} )); then
+        exit 0
+      fi
+
+      # invoke tests here
+
+      # Set TEST_RESULT_FOR_AD: 0 for successful tests, non-zero for failures
+      # 'exit' SHOULD NOT be used in this script after this point.
+
+      # This test randomly decides whether to pass/fail (70% probability to pass)
+      if (($(($RANDOM % 100)) < 30)); then
+        export TEST_RESULT_FOR_AD=1
+      else
+        export TEST_RESULT_FOR_AD=0
+      fi
+  - name: Complete Active Deploy
+    type: deployer
+    extension_id: ibm.devops.services.pipeline.devops.ad_finish
+    target:
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
+    COMMAND: |-
+      #!/bin/bash
+      source ${EXT_DIR}/git_util.sh
+      git_retry clone https://github.com/Osthanes/update_service.git activedeploy
+      activedeploy/activedeploy_step_2.sh
