@@ -2,16 +2,17 @@
 
 /**
  * @ngdoc function
- * @name angularBluemixSeedApp.controller:AboutCtrl
+ * @name angularBluemixSeedApp.controller:HowToCtrl
  * @description
- * # AboutCtrl
+ * # HowToCtrl
  * Controller of the angularBluemixSeedApp
  */
 angular.module('angularBluemixSeedApp')
-  .controller('AboutCtrl', function () {
+  .controller('HowToCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+    console.log('Hello World HowToCtrl');
   });

@@ -1,0 +1,56 @@
+<div class="jumbotron">
+    <h1>Delivery Pipeline</h1>
+    <p>The pre-configured pipeline executes each time you push to the Git repo. The pipeline automates your builds and deployments to IBM Bluemix and consists of three stages:</br>
+        <b style="color:#5bc0de !important; ">Build</b>, <b style="color:#f0ad4e !important">Run Unit Tests</b>, <b style="color:#3f903f !important">Active Deploy</b></p>
+    <i class="text-muted">If a job or a stage fails, the remaining stages will cancel. </i>
+</div>
+
+<ul class="timeline">
+    <li>
+        <div class="timeline-badge info"><i class="glyphicon glyphicon-th"></i></div>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4 class="timeline-title" style="color:#5bc0de !important; ">Build</h4>
+            </div>
+            <div class="timeline-body">
+                <p>The first stage is the build stage, where the pipeline will build and optimize our files for production. It mainly executes the the grunt command "grunt build" which will: </p>
+                <ul>
+                    <li>download our dependencies with bower & npm,</li>
+                    <li>lint our code,</li>
+                    <li>concatenate and minify our scripts and styles to save on those network requests,</li>
+                    <li>optimize images if we were using any,</li>
+                    <li>compile the output of any preprocessors we’re using, and</li>
+                    <li>generally make our application really lean.</li>
+                </ul>
+            </div>
+        </div>
+    </li>
+    <li class="timeline-inverted">
+        <div class="timeline-badge warning"><i class="glyphicon glyphicon-list-alt"></i></div>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4 class="timeline-title" style="color:#f0ad4e !important">Run Unit Tests</h4>
+            </div>
+            <div class="timeline-body">
+                <p>The second stage is testing our code by executing the grunt command "grunt test:dist" which runs our Jasmine unit-tests in Karma.
+                It will test our app's functionality with each deploy, making it easier to catch bugs as our app gets bigger and when more developers joins the team</p>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="timeline-badge success"><i class="glyphicon glyphicon-cloud"></i></div>
+        <div class="timeline-panel">
+            <div class="timeline-heading">
+                <h4 class="timeline-title" style="color:#3f903f !important">Active Deploy</h4>
+            </div>
+            <div class="timeline-body">
+                <p>The third and final stage is where the Active Deploy magic happens.
+                  It will deploy the application to your destination, without downtime.
+                  The Active Deploy pipeline stage information is fully described <a href="https://hub.jazz.net/docs/deploy_ext/#activedeploy">here</a>.</p>
+            </div>
+        </div>
+    </li>
+</ul>
+<div class="jumbotron">
+    <i class="text-muted">The pipeline is also configured with Slack, which will notify you of every successful or failed job and stage. By sending messages to the slack-channel of your choice.</i>
+</div>

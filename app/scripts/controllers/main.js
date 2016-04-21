@@ -14,4 +14,5 @@ angular.module('angularBluemixSeedApp')
       'AngularJS',
       'Karma'
     ];
+        console.log('Hello World MainCtrl');
   });
