@@ -27,5 +27,8 @@ else{
   exports.config.sauceUser = process.env.SAUCE_USERNAME;
   exports.config.sauceKey =  process.env.SAUCE_ACCESS_KEY;
 }
-
 }
+console.log(process.env);
+console.warn(process.env);
+console.log(exports.config);
+console.warn(exports.config);

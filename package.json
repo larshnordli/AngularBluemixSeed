@@ -44,5 +44,11 @@
   "scripts": {
  "install": "node node_modules/protractor/bin/webdriver-manager update",
     "test": "karma start test\\karma.conf.js"
-  }
+  },
+  "author": "ACIT Oslo Team",
+  "contributors": [
+    {
+      "name": "Anders Langseth",
+      "email": "anders.langseth@accenture.com"
+    }
 }

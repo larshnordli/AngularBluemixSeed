@@ -8,11 +8,11 @@
  * Controller of the angularBluemixSeedApp
  */
 angular.module('angularBluemixSeedApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    .controller('MainCtrl', function() {
+        this.awesomeThings = [
+            'HTML5 Boilerplate',
+            'AngularJS',
+            'Karma'
+        ];
         console.log('Hello World MainCtrl');
-  });
+    });
