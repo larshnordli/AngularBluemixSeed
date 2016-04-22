@@ -1,5 +1,6 @@
 {
   "name": "angularbluemixseed",
+"version": "0.0.5",
   "private": true,
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
