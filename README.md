@@ -5,7 +5,7 @@ A simple Hello World Angular Seed application on Bluemix
 
 Press this button, to get your own copy of the sample running in Bluemix! It clones the project, creates DevOps Services Project, generates multi-stage pipeline, deploys application to IBM Bluemix.
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://hub.jazz.net/git/anderslangseth/angularBluemixSeed)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/langz/AngularBluemixSeed.git)
 
 ## Let's Get Started
 This simple pipeline demonstrates how active deploy capabilities can be used within Bluemix Delivery Pipeline services. Once you press the "Deploy to Bluemix" button and log in, you should see a set of steps run through:
@@ -56,7 +56,7 @@ You're Done!
 ![screenshot11](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/11_uiCompleted.PNG)
 ![screenshot19](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/19_dashboard2.PNG)
 
-That's it, you've now seen Active Deploy work in the Bluemix Build & Delivery Pipeline. The next step for you is to set it up in your own pipeline project.
+That's it, you've now seen Active Deploy work in the Bluemix Build & Delivery Pipeline. You can see your Active Deployments and the status of the deployment at https://activedeploy.ng.bluemix.net/deployments.
 
 #Development Locally
 ## Install Dependencies
