@@ -16,41 +16,40 @@ Note: Access Key/OAuth Token and usernames will be needed in the setup of the ap
 ## Try me
 A Angular Seed application on Bluemix, with a pre-configured Delivery Pipeline.
 This app is a proof-of-concept, but also intended for quickly setting up Angular Prototypes.
-Click the "Deploy to Bluemix"-button and start developing your Angular app, with best-practices as project structure, unit-tests, e2e tests, deployment without downtime and rollback option.
+Click the ***"Deploy to Bluemix""***-button and start developing your Angular app, with best-practices as project structure, unit-tests, e2e tests, deployment without downtime and rollback option.
 
 Press this button, to get your own copy of the sample running in Bluemix! It clones the project, creates DevOps Services Project, generates multi-stage pipeline, deploys application to IBM Bluemix.
 
-Note: The "Deploying to Bluemix" stage will take approximately 5-10 minutes, so grab yourself a coffee, and wait :)
-
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/langz/AngularBluemixSeed.git)
 
-## Let's Get Started
+## Walkthrough
 This simple pipeline demonstrates how active deploy capabilities can be used within Bluemix Delivery Pipeline services. Once you press the "Deploy to Bluemix" button and log in, you should see a set of steps run through:
 
 Log in to IBM Bluemix DevOps Services/https://hub.jazz.net/
 
 ![screenshot01](https://github.com/langz/ActiveDeployImages/blob/master/Image_01.png)
 
-Fill in your APP NAME, REGION, ORGANIZATION & SPACE:
+Fill in your **"APP NAME"**, **"REGION"**, **"ORGANIZATION"** & **"SPACE"**:
 
 ![screenshot02](https://github.com/langz/ActiveDeployImages/blob/master/Image_02.png)
 
-Scroll down to fill in your SLACK API AUTHENTICATION & SLACK CHANNEL, SAUCE LABS USERNAME & ACCESS KEY:
+Scroll down to fill in your **"SLACK API AUTHENTICATION"** & **"SLACK CHANNEL"**, **"SAUCE LABS USERNAME"** & **"ACCESS KEY"**, Then Click ***"DEPLOY"***:
 
 ![screenshot03](https://github.com/langz/ActiveDeployImages/blob/master/Image_03.png)
 
+The "Deploying to Bluemix" stage will take approximately **5-10** minutes, so grab yourself a coffee, and wait :)
 Once completed, you will see the following screen:
 
 ![screenshot04](https://github.com/langz/ActiveDeployImages/blob/master/Image_04.png)
 
-You can see your app running by clicking **"VIEW YOUR APP"**:
+You can see your app running by clicking ***"VIEW YOUR APP"***:
 ![screenshot05](https://github.com/langz/ActiveDeployImages/blob/master/HelloWorld.png)
 
 Also, you can click on the ***"EDIT CODE"*** button to access your own copy of the repository and ***"BUILD & DEPLOY"*** in the upper right hand corner to see and configure your pipeline:
 
-![screenshot06](https://github.com/langz/ActiveDeployImages/blob/master/EditCode.PNG)
+![screenshot06](https://github.com/langz/ActiveDeployImages/blob/master/EditCode.png)
 
-Here you will see a Build & Deploy pipeline - full info on this awesome DevOps capability can be found [here](https://hub.jazz.net/docs/deploy/):
+Here you will see the Build & Deploy pipeline - full info on this awesome DevOps capability can be found [here](https://hub.jazz.net/docs/deploy/):
 
 ![screenshot07](https://github.com/langz/ActiveDeployImages/blob/master/Image_05.png)
 
@@ -63,27 +62,27 @@ Here you will see a Build & Deploy pipeline - full info on this awesome DevOps c
 
 1. The first time you run this pipeline:
   - Deploys the app as a Cloud Foundry application to Bluemix
-  - If you run ```cf apps``` from a command line (the labs to help get you acquainted with the command line can be found
-  You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see your new application running.
+  - If you run `cf apps` from a command line, you will see this application running.
+  - You can also see your deployments at dashboard @ console.ng.bluemix.net => Services => Active Deploy([here](https://activedeploy.ng.bluemix.net/deployments)).
+  - You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see your new application running.
 
 ![screenshot08](https://github.com/langz/ActiveDeployImages/blob/master/Image_06.png)
 
-You can also see your deployments at https://activedeploy.ng.bluemix.net/deployments
 
 2. The second time you run the pipeline:
   - If you execute the build stage again with the little arrow, it will re-execute the build, create a new image, and then re-run the Active Deploy Stage. This actually runs the Active Deploy this time through.
-  - You can see your deploy happening using these commands (adjusted for your results in command above):
-  You can look at the Active Deploy Console dashboard @ console.ng.bluemix.net => Services => Active Deploy.
+  - You see your deployments at dashboard @ console.ng.bluemix.net => Services => Active Deploy([here](https://activedeploy.ng.bluemix.net/deployments)).
 
 ![screenshot09](https://github.com/langz/ActiveDeployImages/blob/master/Image_07.png)
 
-You can also see your deployments at https://activedeploy.ng.bluemix.net/deployments
 
 You're Done!
 
-That's it, you've now seen Active Deploy work in the Bluemix Build & Delivery Pipeline. You can see your Active Deployments and the status of the deployment at https://activedeploy.ng.bluemix.net/deployments.
+That's it, you've now used the Delivery Pipeline Service on Bluemix to successfully setup an Angular app, which can be used as a starting point for your new app!
 
-If you did not understand the whole Delivery Pipeline, don't worry, it is documented in more detail in the application you just launched, at http://appnameofyourchoice.mybluemix.net/#/deliveryPipeline
+If you did not understand the whole Delivery Pipeline, don't worry, it is documented in more detail in the application you just launched, at http://appnameofyourchoice.mybluemix.net/#/deliveryPipeline:
+
+![screenshot10](https://github.com/langz/ActiveDeployImages/blob/master/Image_08.png)
 
 #Development Locally
 ## Install Dependencies
