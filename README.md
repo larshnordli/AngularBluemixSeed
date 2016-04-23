@@ -95,7 +95,7 @@ The Git Repo is automatically created after you have completed the process above
 
 ![screenshot11](https://github.com/langz/ActiveDeployImages/blob/master/EditCode.png)
 
-You will then see the following screen with the GIT URL:
+You will then see the following screen with the **"Git URL"**:
 
 ![screenshot12](https://github.com/langz/ActiveDeployImages/blob/master/Settings2.png)
 
