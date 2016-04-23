@@ -100,7 +100,7 @@ You will then see the following screen with the GIT URL:
 ![screenshot12](https://github.com/langz/ActiveDeployImages/blob/master/Settings2.png)
 
 `git clone Git URL to clone the repo, and get it locally,
-ie `git clone https://hub.jazz.net/git/anderslangseth/AppnameOfYourChoice`
+ie `git clone https://hub.jazz.net/git/YourName/AppnameOfYourChoice`
 
 ## Install Dependencies
 `npm install` for installing Node.js Dependencies.
