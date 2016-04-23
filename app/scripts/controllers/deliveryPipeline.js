@@ -2,17 +2,17 @@
 
 /**
  * @ngdoc function
- * @name angularBluemixSeedApp.controller:HowToCtrl
+ * @name angularBluemixSeedApp.controller:DeliveryPipelineCtrl
  * @description
- * # HowToCtrl
+ * # DeliveryPipelineCtrl
  * Controller of the angularBluemixSeedApp
  */
 angular.module('angularBluemixSeedApp')
-    .controller('HowToCtrl', function() {
+    .controller('DeliveryPipelineCtrl', function() {
         this.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
             'Karma'
         ];
-        console.log('Hello World HowToCtrl');
+        console.log('Hello World DeliveryPipelineCtrl');
     });

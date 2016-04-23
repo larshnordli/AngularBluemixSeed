@@ -4,12 +4,20 @@ exports.config = {
     capabilities: {
        'browserName': 'chrome'
      },
-framework: 'jasmine',
+framework: 'jasmine2',
      jasmineNodeOpts: {
        showColors: true,
        defaultTimeoutInterval: 30000,
        isVerbose : true,
        includeStackTrace : true
+     },
+     onPrepare: function() {
+       var jasmineReporters = require('jasmine-reporters');
+       jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
+           consolidateAll: true,
+           savePath: 'test/reports',
+           filePrefix: 'e2e-tests'
+       }));
      }
   };
 
@@ -38,9 +46,5 @@ exports.config.multiCapabilities = [{
   'browserName': 'safari'
 }, {
   'browserName': 'internet explorer'
-}]
+}];
 }
-console.log(process.env);
-console.warn(process.env);
-console.log(exports.config);
-console.warn(exports.config);

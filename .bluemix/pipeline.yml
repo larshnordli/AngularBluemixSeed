@@ -91,6 +91,8 @@ stages:
   - name: e2e tests
     type: tester
     fail_stage: false
+    enable_tests: true
+    test_file_pattern: test/reports/e2e-tests.xml
     extension_id: ibm.devops.services.pipeline.saucelabs
     target:
       url: ${CF_TARGET_URL}

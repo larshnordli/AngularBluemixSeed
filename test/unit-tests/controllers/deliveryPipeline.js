@@ -1,23 +1,23 @@
 'use strict';
 
-describe('Controller: HowToCtrl', function() {
+describe('Controller: DeliveryPipelineCtrl', function() {
 
     // load the controller's module
     beforeEach(module('angularBluemixSeedApp'));
 
-    var HowToCtrl,
+    var DeliveryPipelineCtrl,
         scope;
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function($controller, $rootScope) {
         scope = $rootScope.$new();
-        HowToCtrl = $controller('HowToCtrl', {
+        DeliveryPipelineCtrl = $controller('DeliveryPipelineCtrl', {
             $scope: scope
                 // place here mocked dependencies
         });
     }));
 
     it('should attach a list of awesomeThings to the scope', function() {
-        expect(HowToCtrl.awesomeThings.length).toBe(3);
+        expect(DeliveryPipelineCtrl.awesomeThings.length).toBe(3);
     });
 });

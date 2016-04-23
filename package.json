@@ -1,6 +1,6 @@
 {
   "name": "angularbluemixseed",
-"version": "0.0.5",
+  "version": "0.0.5",
   "private": true,
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
@@ -29,6 +29,7 @@
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
     "jasmine-core": "^2.4.1",
+    "jasmine-reporters": "^2.1.1",
     "jit-grunt": "^0.9.1",
     "jshint-stylish": "^1.0.0",
     "karma": "^0.13.22",
@@ -48,6 +49,8 @@
       "name": "Anders Langseth",
       "email": "anders.langseth@accenture.com"
     }
-],
-"scripts": {"install": "node_modules/protractor/bin/webdriver-manager update"}
+  ],
+  "scripts": {
+    "install": "node_modules/protractor/bin/webdriver-manager update"
+  }
 }

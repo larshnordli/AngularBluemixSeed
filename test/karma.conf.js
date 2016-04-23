@@ -57,7 +57,7 @@ module.exports = function(config) {
         ],
         reporters: ['junit'],
         junitReporter: {
-            outputFile: '../test/reports/unit-tests.xml'
+            outputFile: 'reports/unit-tests.xml'
         },
 
         // Continuous Integration mode

@@ -20,10 +20,10 @@ angular
                 controller: 'MainCtrl',
                 controllerAs: 'main'
             })
-            .when('/howto', {
-                templateUrl: 'views/howto.html',
-                controller: 'HowToCtrl',
-                controllerAs: 'howto'
+            .when('/deliveryPipeline', {
+                templateUrl: 'views/deliveryPipeline.html',
+                controller: 'DeliveryPipelineCtrl',
+                controllerAs: 'deliveryPipeline'
             })
             .otherwise({
                 redirectTo: '/'
