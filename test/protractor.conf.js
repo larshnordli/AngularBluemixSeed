@@ -29,7 +29,7 @@ else{
   exports.config.sauceUser = process.env.SAUCE_USERNAME;
   exports.config.sauceKey =  process.env.SAUCE_ACCESS_KEY;
 }
-exports.config.multiCapabilities: [{
+exports.config.multiCapabilities = [{
   'browserName': 'firefox'
 }, {
   'browserName': 'chrome'
