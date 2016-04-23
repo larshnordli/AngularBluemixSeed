@@ -13,7 +13,7 @@ describe('Routing', function() {
     });
     it('should render /when user navigates to /notcorrectroute', function() {
         browser.get('#/notcorrectroute');
-        expect(browser.getLocationAbsUrl()).toMatch("/");
+        expect(browser.getLocationAbsUrl()).toMatch("/notcorrectroute");
     });
 
 });
