@@ -59,7 +59,7 @@ Here you will see the Build & Deploy pipeline - full info on this awesome DevOps
   - Run Unit Test stage
     - The second stage is Unit Tests & Linting, executing the command `grunt test`, which runs the unit tests with karma and lints our code, reporting to the console and saving reports in test/reports/unit-tests.xml
   - Active Deploy stage
-    - The third stage is where the Active Deploy magic happens. The first time this project runs runs, Active Deploy won't run yet - but it will deploy the application running properly that you can now use to run Active Deploy without downtime. 
+    - The third stage is where the Active Deploy magic happens. The first time this project runs runs, Active Deploy won't run yet - but it will deploy the application running properly that you can now use to run Active Deploy without downtime.
     - It will run e2e-tests, by executing the command `grunt e2e` which runs tests against your live application running in a real browser.
     - Deploys the app if the e2e-tests was successful. Otherwise, a rollback will occur and your app will revert to the original version.
     - The Active Deploy pipeline stage information is fully described [here] (https://hub.jazz.net/docs/deploy_ext/#activedeploy).
@@ -89,6 +89,18 @@ If you did not understand the whole Delivery Pipeline, don't worry, it is docume
 ![screenshot10](https://github.com/langz/ActiveDeployImages/blob/master/Image_08.png)
 
 #Development Locally
+## Fork the Git Repo from your IBM Bluemix DevOps Services
+The Git Repo is automatically created after you have completed the process above, and the url to the repo can be found by clicking the ***"Cogwheel"*** in the upper right hand corner:
+
+![screenshot11](https://github.com/langz/ActiveDeployImages/blob/master/EditCode.png)
+
+You will then see the following screen with the GIT URL:
+
+![screenshot12](https://github.com/langz/ActiveDeployImages/blob/master/Settings.png)
+
+`git clone **Git URL**` to clone the repo, and get it locally,
+ie `git clone https://hub.jazz.net/git/anderslangseth/AppnameOfYourChoice`
+
 ## Install Dependencies
 `npm install` for installing Node.js Dependencies.
 `bower install` for installing Web Dependencies.
