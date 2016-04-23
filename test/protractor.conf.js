@@ -13,6 +13,8 @@ framework: 'jasmine',
      }
   };
 
+
+
 if (process.env.APP_NAME && process.env.APP_NAME !== '') {
 exports.config.baseUrl = 'http://' + process.env.APP_NAME + '.mybluemix.net/';
 if (process.env.SAUCE_USERNAME == '' || process.env.SAUCE_ACCESS_KEY == '') {

@@ -48,5 +48,6 @@
       "name": "Anders Langseth",
       "email": "anders.langseth@accenture.com"
     }
-]
+],
+"scripts": {"install": "node_modules/protractor/bin/webdriver-manager update"}
 }
