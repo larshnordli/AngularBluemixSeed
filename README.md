@@ -28,18 +28,30 @@ Note: The "Deploying to Bluemix" stage will take approximately 5-10 minutes, so 
 This simple pipeline demonstrates how active deploy capabilities can be used within Bluemix Delivery Pipeline services. Once you press the "Deploy to Bluemix" button and log in, you should see a set of steps run through:
 
 Log in to IBM Bluemix DevOps Services/https://hub.jazz.net/
+
 ![screenshot01](https://github.com/langz/ActiveDeployImages/blob/master/Image_01.png)
+
 Fill in your APP NAME, REGION, ORGANIZATION & SPACE:
+
 ![screenshot02](https://github.com/langz/ActiveDeployImages/blob/master/Image_02.png)
+
 Scroll down to fill in your SLACK API AUTHENTICATION & SLACK CHANNEL, SAUCE LABS USERNAME & ACCESS KEY:
+
 ![screenshot03](https://github.com/langz/ActiveDeployImages/blob/master/Image_03.png)
+
 Once completed, you will see the following screen:
+
 ![screenshot04](https://github.com/langz/ActiveDeployImages/blob/master/Image_04.png)
+
 You can see your app running by clicking **"VIEW YOUR APP"**:
 ![screenshot05](https://github.com/langz/ActiveDeployImages/blob/master/HelloWorld.png)
+
 Also, you can click on the ***"EDIT CODE"*** button to access your own copy of the repository and ***"BUILD & DEPLOY"*** in the upper right hand corner to see and configure your pipeline:
+
 ![screenshot06](https://github.com/langz/ActiveDeployImages/blob/master/EditCode.PNG)
+
 Here you will see a Build & Deploy pipeline - full info on this awesome DevOps capability can be found [here](https://hub.jazz.net/docs/deploy/):
+
 ![screenshot07](https://github.com/langz/ActiveDeployImages/blob/master/Image_05.png)
 
   - Build stage
@@ -53,7 +65,9 @@ Here you will see a Build & Deploy pipeline - full info on this awesome DevOps c
   - Deploys the app as a Cloud Foundry application to Bluemix
   - If you run ```cf apps``` from a command line (the labs to help get you acquainted with the command line can be found
   You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see your new application running.
+
 ![screenshot08](https://github.com/langz/ActiveDeployImages/blob/master/Image_06.png)
+
 You can also see your deployments at https://activedeploy.ng.bluemix.net/deployments
 
 2. The second time you run the pipeline:
@@ -61,8 +75,9 @@ You can also see your deployments at https://activedeploy.ng.bluemix.net/deploym
   - You can see your deploy happening using these commands (adjusted for your results in command above):
   You can look at the Active Deploy Console dashboard @ console.ng.bluemix.net => Services => Active Deploy.
 
-  ![screenshot09](https://github.com/langz/ActiveDeployImages/blob/master/Image_07.png)
-  You can also see your deployments at https://activedeploy.ng.bluemix.net/deployments
+![screenshot09](https://github.com/langz/ActiveDeployImages/blob/master/Image_07.png)
+
+You can also see your deployments at https://activedeploy.ng.bluemix.net/deployments
 
 You're Done!
 
