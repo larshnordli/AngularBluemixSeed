@@ -29,6 +29,16 @@ else{
   exports.config.sauceUser = process.env.SAUCE_USERNAME;
   exports.config.sauceKey =  process.env.SAUCE_ACCESS_KEY;
 }
+exports.config.multiCapabilities: [{
+  'browserName': 'firefox'
+}, {
+  'browserName': 'chrome'
+},
+{
+  'browserName': 'safari'
+}, {
+  'browserName': 'internet explorer'
+}]
 }
 console.log(process.env);
 console.warn(process.env);
