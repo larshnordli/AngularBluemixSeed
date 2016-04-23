@@ -2,7 +2,7 @@
     <h1>Delivery Pipeline</h1>
     <p>The pre-configured pipeline executes each time you push to the Git repo. The pipeline automates your builds and deployments to IBM Bluemix and consists of three stages:</br>
         <b style="color:#5bc0de !important; ">Build</b>, <b style="color:#f0ad4e !important">Run Unit Tests</b>, <b style="color:#3f903f !important">Active Deploy</b></p>
-    <i class="text-muted">If a job or a stage fails, the remaining stages will cancel. </i>
+    <i class="text-muted">A Stage can consist of several Jobs </i>
 </div>
 
 <ul class="timeline">
@@ -13,14 +13,14 @@
                 <h4 class="timeline-title" style="color:#5bc0de !important; ">Build</h4>
             </div>
             <div class="timeline-body">
-                <p>The first stage is the build stage, where the pipeline will build and optimize our files for production. It mainly executes the the grunt command "grunt build" which will: </p>
+                <p>The first stage is the <b>"Build"</b> stage and consist of the <b>"Build"</b> job, where the pipeline will build and optimize our files for production. It mainly executes the the grunt command <i>"grunt build"</i> which will: </p>
                 <ul>
-                    <li>download our dependencies with bower & npm,</li>
-                    <li>lint our code,</li>
-                    <li>concatenate and minify our scripts and styles to save on those network requests,</li>
-                    <li>optimize images if we were using any,</li>
-                    <li>compile the output of any preprocessors we’re using, and</li>
-                    <li>generally make our application really lean.</li>
+                    <li>Download our dependencies with bower & npm,</li>
+                    <li>Lint our code,</li>
+                    <li>Concatenate and minify our scripts and styles to save on those network requests,</li>
+                    <li>Optimize images if we were using any,</li>
+                    <li>Compile the output of any preprocessors we’re using, and</li>
+                    <li>Generally make our application really lean.</li>
                 </ul>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 <h4 class="timeline-title" style="color:#f0ad4e !important">Run Unit Tests</h4>
             </div>
             <div class="timeline-body">
-                <p>The second stage is testing our code by executing the grunt command "grunt test:dist" which runs our Jasmine unit-tests in Karma. It will test our app's functionality with each deploy, making it easier to catch bugs as our app gets bigger and when more developers joins the team</p>
+                <p>The second stage <b>"Run Unit Test"</b> and consist of the <b>"Linting and Unit Tests"</b> job. The job will test our code by executing the grunt command <i>"grunt test:dist"</i> which runs our Jasmine unit-tests in Karma and lints our code. It will test our app's functionality and code standards with each deploy, making it easier to catch bugs as our app gets bigger and when more developers joins the team.</p>
             </div>
         </div>
     </li>
@@ -43,7 +43,22 @@
                 <h4 class="timeline-title" style="color:#3f903f !important">Active Deploy</h4>
             </div>
             <div class="timeline-body">
-                <p>The third and final stage is where the Active Deploy magic happens. It will deploy the application to your destination, without downtime. The Active Deploy pipeline stage information is fully described <a href="https://hub.jazz.net/docs/deploy_ext/#activedeploy">here</a>.</p>
+                <p>The third and final stage is <b>Active Deploy</b>. It will deploy the application to your destination, without downtime. The stage contains of the following four jobs:</p>
+                <ul>
+                    <li>
+                        <b>Deploy Single Instance</b> deploys the new app as a single instance with no mapped routes
+                    </li>
+                    <li>
+                        <b>Begin Active Deploy</b> starts the deployment process to increase the instances of your new app until both versions of your app are live in production
+                    </li>
+                    <li>
+                        <b>e2e tests</b> executes the the grunt command <i>"grunt e2e"</i>, which runs tests against your live application running in a real browser. Setting the env-variable TEST_RESULT_FOR_AD to 0 for successful tests and 1 for failures.
+                    </li>
+                    <li>
+                        <b>Complete Active Deploy</b> ends the deployment process and decreases the original version of your app if the test phase was successful (TEST_RESULT_FOR_AD=0). Otherwise (TEST_RESULT_FOR_AD=1), a rollback will occur and your app will revert to the original version.
+                    </li>
+                </ul>
+                <p><i>The Active Deploy pipeline stage information is fully described <a href="https://hub.jazz.net/docs/deploy_ext/#activedeploy">here</a><i></p>
             </div>
         </div>
     </li>

@@ -70,6 +70,11 @@ While running, each save to the source-code will automatically force a browser r
 ## Testing
 Running `grunt test` will run the unit tests with karma, reporting to the console and to test/reports.
 
+## E2E Testing
+Running `grunt e2e` will run e2e tests against your application running in a real browser, interacting with it as a user would.
+Running this command locally requires you to have the web application running locally, i.e 'grunt serve'.
+Running it on Bluemix, in the Delivery Pipeline Service, will do the tests against your live application.
+
 ## Build
 Running `grunt build` will create a production version of our application, by: linting, concatenating and minifying our scripts & styles, optimizing images, compiling the output of any preprocessors used, and save it in our dist folder.
 
@@ -83,4 +88,4 @@ Running `grunt test:dist` will run the unit tests with karma, reporting to the c
 Running `grunt`. The default task will create a production version of our application, run the unit tests with karma and launch the production-ready app in a new tab.
 
 ## Delivery Pipeline Service
-More notes about the Delivery Pipeline Service is located in the Application itself in the howTo-page, http://localhost:9000/#/howto
+More notes about the Delivery Pipeline Service is located in the Application itself on the DeliveryPipeline-page, http://localhost:9000/#/howto
