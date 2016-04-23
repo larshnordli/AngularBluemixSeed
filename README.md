@@ -11,6 +11,7 @@ Generate OAuth Token https://api.slack.com/docs/oauth-test-tokens
 Create an account on https://saucelabs.com/
 Get your Access Key https://saucelabs.com/beta/user-settings
 
+
 Note: Access Key/OAuth Token and usernames will be needed in the setup of the application.
 
 ## Try me
@@ -25,7 +26,7 @@ Press this button, to get your own copy of the sample running in Bluemix! It clo
 ## Walkthrough
 This simple pipeline demonstrates how active deploy capabilities can be used within Bluemix Delivery Pipeline services. Once you press the "Deploy to Bluemix" button and log in, you should see a set of steps run through:
 
-Log in to IBM Bluemix DevOps Services/https://hub.jazz.net/
+Log in to IBM Bluemix DevOps Services/https://hub.jazz.net/:
 
 ![screenshot01](https://github.com/langz/ActiveDeployImages/blob/master/Image_01.png)
 
@@ -58,13 +59,16 @@ Here you will see the Build & Deploy pipeline - full info on this awesome DevOps
   - Run Unit Test stage
     - The second stage is Unit Tests & Linting, executing the command `grunt test`, which runs the unit tests with karma and lints our code, reporting to the console and saving reports in test/reports/unit-tests.xml
   - Active Deploy stage
-    - The third stage is where the Active Deploy magic happens. The first time this project runs runs, Active Deploy won't run yet - but it will deploy the application running properly that you can now use to run Active Deploy without downtime. The Active Deploy pipeline stage information is fully described [here] (https://hub.jazz.net/docs/deploy_ext/#activedeploy).
+    - The third stage is where the Active Deploy magic happens. The first time this project runs runs, Active Deploy won't run yet - but it will deploy the application running properly that you can now use to run Active Deploy without downtime. 
+    - It will run e2e-tests, by executing the command `grunt e2e` which runs tests against your live application running in a real browser.
+    - Deploys the app if the e2e-tests was successful. Otherwise, a rollback will occur and your app will revert to the original version.
+    - The Active Deploy pipeline stage information is fully described [here] (https://hub.jazz.net/docs/deploy_ext/#activedeploy).
 
 1. The first time you run this pipeline:
   - Deploys the app as a Cloud Foundry application to Bluemix
   - If you run `cf apps` from a command line, you will see this application running.
   - You can also see your deployments at dashboard @ console.ng.bluemix.net => Services => Active Deploy([here](https://activedeploy.ng.bluemix.net/deployments)).
-  - You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see your new application running.
+  - You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see your new application running:
 
 ![screenshot08](https://github.com/langz/ActiveDeployImages/blob/master/Image_06.png)
 
@@ -72,7 +76,7 @@ Here you will see the Build & Deploy pipeline - full info on this awesome DevOps
 2. The second time you run the pipeline:
   - If you execute the build stage again with the little arrow, it will re-execute the build, create a new image, and then re-run the Active Deploy Stage. This actually runs the Active Deploy this time through.
   - You see your deployments at dashboard @ console.ng.bluemix.net => Services => Active Deploy([here](https://activedeploy.ng.bluemix.net/deployments)).
-
+  - You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see that you now have **two** applications running:
 ![screenshot09](https://github.com/langz/ActiveDeployImages/blob/master/Image_07.png)
 
 
