@@ -1,62 +1,74 @@
 # Angular Bluemix Seed with Active Deploy Service Plugin and Delivery Pipeline Service
 
+## Prerequisites
+The Delivery Pipeline Service on Bluemix is using Slack for notifications and Sauce Labs for e2e tests/Selenium integration or acceptance tests, therefore accounts and access keys/tokens is needed.
+
+### Slack
+Create an account on https://slack.com/
+Generate OAuth Token https://api.slack.com/docs/oauth-test-tokens
+
+### Sauce Labs
+Create an account on https://saucelabs.com/
+Get your Access Key https://saucelabs.com/beta/user-settings
+
+Note: Access Key/OAuth Token and usernames will be needed in the setup of the application.
+
 ## Try me
-A simple Hello World Angular Seed application on Bluemix
+A Angular Seed application on Bluemix, with a pre-configured Delivery Pipeline.
+This app is a proof-of-concept, but also intended for quickly setting up Angular Prototypes.
+Click the "Deploy to Bluemix"-button and start developing your Angular app, with best-practices as project structure, unit-tests, e2e tests, deployment without downtime and rollback option.
 
 Press this button, to get your own copy of the sample running in Bluemix! It clones the project, creates DevOps Services Project, generates multi-stage pipeline, deploys application to IBM Bluemix.
+
+Note: The "Deploying to Bluemix" stage will take approximately 5-10 minutes, so grab yourself a coffee, and wait :)
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/langz/AngularBluemixSeed.git)
 
 ## Let's Get Started
 This simple pipeline demonstrates how active deploy capabilities can be used within Bluemix Delivery Pipeline services. Once you press the "Deploy to Bluemix" button and log in, you should see a set of steps run through:
 
-![screenshot01](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/01_login.PNG)
-![screenshot02](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/02_deploy.PNG)
-
-Once completed, you can see your app running by clicking **"VIEW YOUR APP"**:
-
-![screenshot03](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/03_deployed2BM.PNG)
-![screenshot04](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/04_viewYourApp.PNG)
-
+Log in to IBM Bluemix DevOps Services/https://hub.jazz.net/
+![screenshot01](https://github.com/langz/ActiveDeployImages/blob/master/Image_01.png)
+Fill in your APP NAME, REGION, ORGANIZATION & SPACE:
+![screenshot02](https://github.com/langz/ActiveDeployImages/blob/master/Image_02.png)
+Scroll down to fill in your SLACK API AUTHENTICATION & SLACK CHANNEL, SAUCE LABS USERNAME & ACCESS KEY:
+![screenshot03](https://github.com/langz/ActiveDeployImages/blob/master/Image_03.png)
+Once completed, you will see the following screen:
+![screenshot04](https://github.com/langz/ActiveDeployImages/blob/master/Image_04.png)
+You can see your app running by clicking **"VIEW YOUR APP"**:
+![screenshot05](https://github.com/langz/ActiveDeployImages/blob/master/HelloWorld.png)
 Also, you can click on the ***"EDIT CODE"*** button to access your own copy of the repository and ***"BUILD & DEPLOY"*** in the upper right hand corner to see and configure your pipeline:
-
-![screenshot05](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/05_editCode.PNG)
-![screenshot06](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/06_buildAndDeploy.PNG)
-
-Here you will see a Build & Deploy pipeline - full info on this awesome DevOps capability can be found [here](https://hub.jazz.net/docs/deploy/).
+![screenshot06](https://github.com/langz/ActiveDeployImages/blob/master/EditCode.PNG)
+Here you will see a Build & Deploy pipeline - full info on this awesome DevOps capability can be found [here](https://hub.jazz.net/docs/deploy/):
+![screenshot07](https://github.com/langz/ActiveDeployImages/blob/master/Image_05.png)
 
   - Build stage
-    - The first stage is the build stage - that is the standard build stage in Bluemix - however you create your application image in a pipeline is what would be done here.
-  - Deploy stage
-    - The second stage is where the Active Deploy magic happens. The first time this project runs runs, Active Deploy won't run yet - but it will gave you a sample application running properly that you can now use to run Active Deploy to show you have the pipeline integration works. The Active Deploy pipeline stage information is fully described [here] (https://hub.jazz.net/docs/deploy_ext/#activedeploy).
+    - The first stage is the build stage, executing the command  `grunt build`, which will create a production version of our application, by: concatenating and minifying our scripts & styles, optimizing images, compiling the output of any preprocessors used, and save it in our dist folder.
+  - Run Unit Test stage
+    - The second stage is Unit Tests & Linting, executing the command `grunt test`, which runs the unit tests with karma and lints our code, reporting to the console and saving reports in test/reports/unit-tests.xml
+  - Active Deploy stage
+    - The third stage is where the Active Deploy magic happens. The first time this project runs runs, Active Deploy won't run yet - but it will deploy the application running properly that you can now use to run Active Deploy without downtime. The Active Deploy pipeline stage information is fully described [here] (https://hub.jazz.net/docs/deploy_ext/#activedeploy).
 
 1. The first time you run this pipeline:
   - Deploys the app as a Cloud Foundry application to Bluemix
-  - If you run ```cf apps``` from a command line (the labs to help get you acquainted with the command line can be found [here](https://github.com/IBM-Bluemix/active-deploy/blob/master/labs/README.md)) you will see this application running:  
-
-  ![screenshot07](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/07_firstRun.PNG)
-
-  or something similar - this is your initial sample application. Or you can look at the Bluemix console dashboard @ console.ng.bluemix.net to see your new application running.
-
-  ![screenshot18](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/18_dashboard1.PNG)
+  - If you run ```cf apps``` from a command line (the labs to help get you acquainted with the command line can be found
+  You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see your new application running.
+![screenshot08](https://github.com/langz/ActiveDeployImages/blob/master/Image_06.png)
+You can also see your deployments at https://activedeploy.ng.bluemix.net/deployments
 
 2. The second time you run the pipeline:
   - If you execute the build stage again with the little arrow, it will re-execute the build, create a new image, and then re-run the Active Deploy Stage. This actually runs the Active Deploy this time through.
   - You can see your deploy happening using these commands (adjusted for your results in command above):
+  You can look at the Active Deploy Console dashboard @ console.ng.bluemix.net => Services => Active Deploy.
 
-  ![screenshot08](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/08_secondRun.PNG)
-
-  Or you can look at the Active Deploy Console dashboard @ console.ng.bluemix.net => Services => Active Deploy.
-
-  ![screenshot09](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/09_uiRunning.PNG)
+  ![screenshot09](https://github.com/langz/ActiveDeployImages/blob/master/Image_07.png)
+  You can also see your deployments at https://activedeploy.ng.bluemix.net/deployments
 
 You're Done!
 
-![screenshot10](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/10_completed.PNG)
-![screenshot11](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/11_uiCompleted.PNG)
-![screenshot19](https://github.com/IBM-Bluemix/active-deploy/blob/master/sample-apps/pipeline/images/19_dashboard2.PNG)
-
 That's it, you've now seen Active Deploy work in the Bluemix Build & Delivery Pipeline. You can see your Active Deployments and the status of the deployment at https://activedeploy.ng.bluemix.net/deployments.
+
+If you did not understand the whole Delivery Pipeline, don't worry, it is documented in more detail in the application you just launched, at http://appnameofyourchoice.mybluemix.net/#/deliveryPipeline
 
 #Development Locally
 ## Install Dependencies
@@ -68,7 +80,7 @@ Run `grunt serve` to create a local, Node-based http server on localhost:9000, a
 While running, each save to the source-code will automatically force a browser refresh so you don’t have to do this yourself (live reloading).
 
 ## Testing
-Running `grunt test` will run the unit tests with karma, reporting to the console and to test/reports.
+Running `grunt test` will run the unit tests with karma, reporting to the console and saving reports in test/reports/unit-tests.xml.
 
 ## E2E Testing
 Running `grunt e2e` will run e2e tests against your application running in a real browser, interacting with it as a user would.
@@ -82,7 +94,7 @@ Running `grunt build` will create a production version of our application, by: l
 Running `grunt serve:dist` will create a production version of our application and launch it in a new tab.
 
 ## Test the production-ready app
-Running `grunt test:dist` will run the unit tests with karma, reporting to the console and to test/reports.
+Running `grunt test:dist` will run the unit tests with karma, reporting to the console and saving reports in test/reports/e2e-tests.xml.
 
 ## Build, Test and Preview the production-ready app
 Running `grunt`. The default task will create a production version of our application, run the unit tests with karma and launch the production-ready app in a new tab.
