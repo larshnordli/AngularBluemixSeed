@@ -77,6 +77,7 @@ Here you will see the Build & Deploy pipeline - full info on this awesome DevOps
   - If you execute the build stage again with the little arrow, it will re-execute the build, create a new image, and then re-run the Active Deploy Stage. This actually runs the Active Deploy this time through.
   - You see your deployments at dashboard @ console.ng.bluemix.net => Services => Active Deploy([here](https://activedeploy.ng.bluemix.net/deployments)).
   - You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see that you now have **two** applications running:
+
 ![screenshot09](https://github.com/langz/ActiveDeployImages/blob/master/Image_07.png)
 
 
@@ -98,7 +99,7 @@ You will then see the following screen with the GIT URL:
 
 ![screenshot12](https://github.com/langz/ActiveDeployImages/blob/master/Settings.png)
 
-`git clone **Git URL**` to clone the repo, and get it locally,
+`git clone Git URL to clone the repo, and get it locally,
 ie `git clone https://hub.jazz.net/git/anderslangseth/AppnameOfYourChoice`
 
 ## Install Dependencies
