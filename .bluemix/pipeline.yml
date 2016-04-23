@@ -14,9 +14,12 @@ stages:
     script: |-
       export PATH=/opt/IBM/node-v4.2/bin:$PATH
       npm install
-      npm -g install bower
+      npm install -g bower
       bower install
+      npm install -g grunt-cli
       grunt build
+      tar -czf node_modules.tar.gz node_modules
+      rm -rf node_modules
 - name: Run Unit Test
   inputs:
   - type: job
@@ -28,7 +31,7 @@ stages:
   - name: Linting and Unit Tests
     type: tester
     script: |-
-      npm install
+      tar -xzf node_modules.tar.gz
       grunt test:dist
     enable_tests: true
     test_file_pattern: test/reports/unit-tests.xml
@@ -62,7 +65,7 @@ stages:
   - name: Deploy Single Instance
     type: deployer
     target:
-      region_id: ibm:yp:us-south
+      region_id: ${BLUEMIX_REGION_ID}
       organization: ${CF_ORGANIZATION}
       space: ${CF_SPACE}
       application: ${CF_APP}
@@ -71,7 +74,6 @@ stages:
       NAME="${CF_APP}_${BUILD_NUMBER}"
       cf push "${NAME}" --no-route -i 1 -m 64M
       export NAME
-      printenv NAME
   - name: Begin Active Deploy
     type: deployer
     extension_id: ibm.devops.services.pipeline.devops.ad_start
@@ -86,27 +88,35 @@ stages:
       source ${EXT_DIR}/git_util.sh
       git_retry clone https://github.com/Osthanes/update_service.git activedeploy
       activedeploy/activedeploy_step_1.sh
-  - name: Test
+  - name: e2e tests
     type: tester
-    script: |-
+    fail_stage: false
+    extension_id: ibm.devops.services.pipeline.saucelabs
+    target:
+      url: ${CF_TARGET_URL}
+      organization: ${CF_ORGANIZATION}
+      space: ${CF_SPACE}
+    ACCESS: ${SAUCE_KEY}
+    DL_ASSETS: 'true'
+    SELECT_CMD: custom
+    USER_ID: ${SAUCE_USER}
+    COMMAND: |-
       #!/bin/bash
+      tar -xzf node_modules.tar.gz
       set -x
+      export PATH=/opt/IBM/node-v4.2/bin:$PATH
 
       # Start by checking if a previous test failed. If so, quit now.
       # Make sure exit code is 0 (success).
       if [[ -n ${TEST_RESULT_FOR_AD} ]] && (( ${TEST_RESULT_FOR_AD} )); then
         exit 0
       fi
-
       # invoke tests here
 
       # Set TEST_RESULT_FOR_AD: 0 for successful tests, non-zero for failures
       # 'exit' SHOULD NOT be used in this script after this point.
-
-      # This test randomly decides whether to pass/fail (70% probability to pass)
-      if (($(($RANDOM % 100)) < 30)); then
-        export TEST_RESULT_FOR_AD=1
-      else
+      export TEST_RESULT_FOR_AD=1
+      if (grunt e2e); then
         export TEST_RESULT_FOR_AD=0
       fi
   - name: Complete Active Deploy
@@ -118,6 +128,11 @@ stages:
       space: ${CF_SPACE}
     COMMAND: |-
       #!/bin/bash
+      if [[ -z ${TEST_RESULT_FOR_AD} ]]; then
+        TEST_RESULT_FOR_AD=1;
+      fi
+      echo resultater
+      echo ${TEST_RESULT_FOR_AD}
       source ${EXT_DIR}/git_util.sh
       git_retry clone https://github.com/Osthanes/update_service.git activedeploy
       activedeploy/activedeploy_step_2.sh
