@@ -105,7 +105,10 @@ ie `git clone https://hub.jazz.net/git/YourName/AppnameOfYourChoice`
 ## Install Dependencies
 `npm install` for installing Node.js Dependencies.
 
+`npm install --global bower grunt-cli` for installing bower and grunt globally.
+
 `bower install` for installing Web Dependencies.
+
 
 ## Start the server & preview
 Run `grunt serve` to create a local, Node-based http server on localhost:9000, and launch your newly scaffolded application in a new tab.
