@@ -104,6 +104,7 @@ ie `git clone https://hub.jazz.net/git/YourName/AppnameOfYourChoice`
 
 ## Install Dependencies
 `npm install` for installing Node.js Dependencies.
+
 `bower install` for installing Web Dependencies.
 
 ## Start the server & preview
