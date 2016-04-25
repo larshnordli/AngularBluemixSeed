@@ -13,6 +13,7 @@ stages:
     build_type: grunt
     script: |-
       export PATH=/opt/IBM/node-v4.2/bin:$PATH
+      npm set progress=false
       npm install
       npm install -g bower
       bower install
