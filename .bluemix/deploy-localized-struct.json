@@ -9,7 +9,7 @@
   },
   "form": [
     {
-      
+
     },
     {
       "title": "$deploy.appName"
@@ -17,7 +17,7 @@
     {
       "items": [
         {
-          
+
         },
         {
           "title": "$region"
@@ -32,16 +32,15 @@
           "title": "$prodStage"
         },
         {
-          
+
         },
         {
-          
+
         },
         {
-          
+
         }
       ]
     }
   ]
 }
- 

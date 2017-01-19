@@ -54,7 +54,7 @@ stages:
     value: ''
     type: text
   - name: APP_NAME
-    value: ${CF_APP_NAME}
+    value: ${CF_APP}
     type: text
   - name: SAUCE_USERNAME
     value: ${SAUCE_USER}
@@ -72,7 +72,7 @@ stages:
       application: ${CF_APP_NAME}
     script: |
       #!/bin/bash
-      NAME="${CF_APP_NAME}_${BUILD_NUMBER}"
+      NAME="${CF_APP}_${BUILD_NUMBER}"
       cf push "${NAME}" --no-route -i 1 -m 64M
       export NAME
   - name: Begin Active Deploy
@@ -139,3 +139,8 @@ stages:
       source ${EXT_DIR}/git_util.sh
       git_retry clone https://github.com/Osthanes/update_service.git activedeploy
       activedeploy/activedeploy_step_2.sh
+hooks:
+- enabled: true
+  label: null
+  ssl_enabled: false
+  url: https://devops-api.ng.bluemix.net/v1/messaging/webhook/publish
