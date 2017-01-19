@@ -4,6 +4,7 @@ stages:
   inputs:
   - type: git
     branch: master
+    service: ${SAMPLE_REPO}
   triggers:
   - type: commit
   jobs:
@@ -13,7 +14,6 @@ stages:
     build_type: grunt
     script: |-
       export PATH=/opt/IBM/node-v4.2/bin:$PATH
-      npm set progress=false
       npm install
       npm install -g bower
       bower install
@@ -54,7 +54,7 @@ stages:
     value: ''
     type: text
   - name: APP_NAME
-    value: ${CF_APP}
+    value: ${CF_APP_NAME}
     type: text
   - name: SAUCE_USERNAME
     value: ${SAUCE_USER}
@@ -66,13 +66,13 @@ stages:
   - name: Deploy Single Instance
     type: deployer
     target:
-      region_id: ${BLUEMIX_REGION_ID}
-      organization: ${CF_ORGANIZATION}
-      space: ${CF_SPACE}
-      application: ${CF_APP}
+      region_id: ${PROD_REGION_ID}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
+      application: ${CF_APP_NAME}
     script: |
       #!/bin/bash
-      NAME="${CF_APP}_${BUILD_NUMBER}"
+      NAME="${CF_APP_NAME}_${BUILD_NUMBER}"
       cf push "${NAME}" --no-route -i 1 -m 64M
       export NAME
   - name: Begin Active Deploy
@@ -80,8 +80,8 @@ stages:
     extension_id: ibm.devops.services.pipeline.devops.ad_start
     target:
       url: ${CF_TARGET_URL}
-      organization: ${CF_ORGANIZATION}
-      space: ${CF_SPACE}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
     RAMPDOWN_DURATION: 1m
     RAMPUP_DURATION: 1m
     COMMAND: |-
@@ -97,8 +97,8 @@ stages:
     extension_id: ibm.devops.services.pipeline.saucelabs
     target:
       url: ${CF_TARGET_URL}
-      organization: ${CF_ORGANIZATION}
-      space: ${CF_SPACE}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
     ACCESS: ${SAUCE_KEY}
     DL_ASSETS: 'true'
     SELECT_CMD: custom
@@ -127,8 +127,8 @@ stages:
     extension_id: ibm.devops.services.pipeline.devops.ad_finish
     target:
       url: ${CF_TARGET_URL}
-      organization: ${CF_ORGANIZATION}
-      space: ${CF_SPACE}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
     COMMAND: |-
       #!/bin/bash
       if [[ -z ${TEST_RESULT_FOR_AD} ]]; then
