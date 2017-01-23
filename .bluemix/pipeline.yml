@@ -72,7 +72,7 @@ stages:
       application: ${CF_APP_NAME}
     script: |
       #!/bin/bash
-      NAME="${CF_APP}_${BUILD_NUMBER}"
+      NAME="${CF_APP}"
       cf push "${NAME}" --no-route -i 1 -m 64M
       export NAME
   - name: Begin Active Deploy
