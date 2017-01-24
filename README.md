@@ -1,106 +1,40 @@
 # Angular Bluemix Seed with Active Deploy Service Plugin and Delivery Pipeline Service
 
 ## Prerequisites
-The Delivery Pipeline Service on Bluemix is using Slack for notifications and Sauce Labs for e2e tests/Selenium integration or acceptance tests, therefore accounts and access keys/tokens is needed.
+1. **Log in to Bluemix and ensure that you are in the organization and space you wish to locate your app.**. There is no way to choose the organization or space in the Toolchain creation step, so this has to be done on beforehand
+2. Ensure that you have at least one Toolchain space availble in your space
+3. Ensure that your Bluemix account is connected to and authorized to control your GitHub account. *The Toolchain will automatically create a repository on your account*
 
-### Slack
-Create an account on https://slack.com/
-Generate OAuth Token https://api.slack.com/docs/oauth-test-tokens
-
-### Sauce Labs
-Create an account on https://saucelabs.com/
-Get your Access Key https://saucelabs.com/beta/user-settings
-
-
-Note: Access Key/OAuth Token and usernames will be needed in the setup of the application.
-
-## Try me
+## Get Started
 A Angular Seed application on Bluemix, with a pre-configured Delivery Pipeline.
 This app is a proof-of-concept, but also intended for quickly setting up Angular Prototypes.
-Click the ***"Deploy to Bluemix""***-button and start developing your Angular app, with best-practices as project structure, unit-tests, e2e tests, deployment without downtime and rollback option.
+Click the **Deploy to Bluemix**-button below and start developing your Angular app, with best-practices as project structure, unit-tests, e2e tests, deployment without downtime and rollback option.
 
 Press this button, to get your own copy of the sample running in Bluemix! It clones the project, creates DevOps Services Project, generates multi-stage pipeline, deploys application to IBM Bluemix.
+
+**Before you click this button**, read the Prerequisites. Also be aware that the name of your toolchain will be reflected in the app name and GitHub Repository that Bluemix creates for you.
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/larshnordli/AngularBluemixSeed)
 
 ## Walkthrough
-This simple pipeline demonstrates how active deploy capabilities can be used within Bluemix Delivery Pipeline services. Once you press the "Deploy to Bluemix" button and log in, you should see a set of steps run through:
+1. When you click the **Deploy to Bluemix**-button, you will be taken to Bluemix's Create Toolchain page. The name you choose here will be the name of several things:
+- The Toolchain  
+- The Delivery Pipeline within the toolchain
+- The App that is generated through the Pipelines
+- The GitHub Repo that is created on your own GitHub account
 
-Log in to IBM Bluemix DevOps Services/https://hub.jazz.net/:
+**Short note on app names:** You can choose to use whatever name you'd like, but if you're planning to use this as a frontend-app alongside a backend-app, it is recommended that you use the postfix `-frontend` and `-backend` for the apps respectively. If you for example are to create a new web app named "Aviator", a good naming convention would be to have the frontend apps *aviator-frontend* (*aviator-front-test* will be created for you), in addition to *aviator-backend* (*aviator-backend-test* will be created for you).
 
-![screenshot01](https://github.com/langz/ActiveDeployImages/blob/master/Image_01.png)
+2. When you click the **Create** button in the Toolchain page, you will get an overview of the tools integrated into the Toolchain. Ensure that the GitHub tools and the Delivery Pipeline is Configured :heavy_check_mark:.
+3. To monitor the progress of the app creation, click on the Delivery Pipeline box and monitor the stages. When all stages are successfully finished, two apps are created: **Test App** with the postfix `-test`, and a **Production App** without pre- or postfix that must be manually started. This is done by clicking the small Play-button on the top of the `Production Stage` stage. *The Deploy to Production stage is manual in case there are errors outside runtime, i.e., not caught by build or deploy jobs.*
 
-Fill in your **"APP NAME"**, **"REGION"**, **"ORGANIZATION"** & **"SPACE"**:
-
-![screenshot02](https://github.com/langz/ActiveDeployImages/blob/master/Image_02.png)
-
-Scroll down to fill in your **"SLACK API AUTHENTICATION"** & **"SLACK CHANNEL"**, **"SAUCE LABS USERNAME"** & **"ACCESS KEY"**, Then Click ***"DEPLOY"***:
-
-![screenshot03](https://github.com/langz/ActiveDeployImages/blob/master/Image_03.png)
-
-The "Deploying to Bluemix" stage will take approximately **5-10** minutes, so grab yourself a coffee, and wait :)
-Once completed, you will see the following screen:
-
-![screenshot04](https://github.com/langz/ActiveDeployImages/blob/master/Image_04.png)
-
-You can see your app running by clicking ***"VIEW YOUR APP"***:
-![screenshot05](https://github.com/langz/ActiveDeployImages/blob/master/HelloWorld.png)
-
-Also, you can click on the ***"EDIT CODE"*** button to access your own copy of the repository and ***"BUILD & DEPLOY"*** in the upper right hand corner to see and configure your pipeline:
-
-![screenshot06](https://github.com/langz/ActiveDeployImages/blob/master/EditCode.png)
-
-Here you will see the Build & Deploy pipeline - full info on this awesome DevOps capability can be found [here](https://hub.jazz.net/docs/deploy/):
-
-![screenshot07](https://github.com/langz/ActiveDeployImages/blob/master/Image_05.png)
-
-  - Build stage
-    - The first stage is the build stage, executing the command  `grunt build`, which will create a production version of our application, by: concatenating and minifying our scripts & styles, optimizing images, compiling the output of any preprocessors used, and save it in our dist folder.
-  - Run Unit Test stage
-    - The second stage is Unit Tests & Linting, executing the command `grunt test`, which runs the unit tests with karma and lints our code, reporting to the console and saving reports in test/reports/unit-tests.xml
-  - Active Deploy stage
-    - The third stage is where the Active Deploy magic happens. The first time this project runs runs, Active Deploy won't run yet - but it will deploy the application running properly that you can now use to run Active Deploy without downtime.
-    - It will run e2e-tests, by executing the command `grunt e2e` which runs tests against your live application running in a real browser.
-    - Deploys the app if the e2e-tests was successful. Otherwise, a rollback will occur and your app will revert to the original version.
-    - The Active Deploy pipeline stage information is fully described [here] (https://hub.jazz.net/docs/deploy_ext/#activedeploy).
-
-1. The first time you run this pipeline:
-  - Deploys the app as a Cloud Foundry application to Bluemix
-  - If you run `cf apps` from a command line, you will see this application running.
-  - You can also see your deployments at dashboard @ console.ng.bluemix.net => Services => Active Deploy([here](https://activedeploy.ng.bluemix.net/deployments)).
-  - You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see your new application running:
-
-![screenshot08](https://github.com/langz/ActiveDeployImages/blob/master/Image_06.png)
-
-
-2. The second time you run the pipeline:
-  - If you execute the build stage again with the little arrow, it will re-execute the build, create a new image, and then re-run the Active Deploy Stage. This actually runs the Active Deploy this time through.
-  - You see your deployments at dashboard @ console.ng.bluemix.net => Services => Active Deploy([here](https://activedeploy.ng.bluemix.net/deployments)).
-  - You can look at the Bluemix console dashboard @ console.ng.bluemix.net to see that you now have **two** applications running:
-
-![screenshot09](https://github.com/langz/ActiveDeployImages/blob/master/Image_07.png)
-
-
-You're Done!
-
-That's it, you've now used the Delivery Pipeline Service on Bluemix to successfully setup an Angular app, which can be used as a starting point for your new app!
-
-If you did not understand the whole Delivery Pipeline, don't worry, it is documented in more detail in the application you just launched, at http://appnameofyourchoice.mybluemix.net/#/deliveryPipeline:
-
-![screenshot10](https://github.com/langz/ActiveDeployImages/blob/master/Image_08.png)
-
+**Note:** Altough two apps are created, only one repo is created.
+----
 #Development Locally
-## Fork the Git Repo from your IBM Bluemix DevOps Services
-The Git Repo is automatically created after you have completed the process above, and the url to the repo can be found by clicking the ***"Cogwheel"*** in the upper right hand corner:
+## Clone the Git Repo from your GitHub Repo created in the Toolchain
 
-![screenshot11](https://github.com/langz/ActiveDeployImages/blob/master/EditCode.png)
-
-You will then see the following screen with the **"Git URL"**:
-
-![screenshot12](https://github.com/langz/ActiveDeployImages/blob/master/Settings2.png)
-
-`git clone Git URL to clone the repo, and get it locally,
-ie `git clone https://hub.jazz.net/git/YourName/AppnameOfYourChoice`
+`git clone <Git URL>` to clone the repo, and get it locally,
+ie `git clone https://github.com/GitHubUserName/AppName`
 
 ## Install Dependencies
 `npm install` for installing Node.js Dependencies.
@@ -108,7 +42,6 @@ ie `git clone https://hub.jazz.net/git/YourName/AppnameOfYourChoice`
 `npm install --global bower grunt-cli` for installing bower and grunt globally.
 
 `bower install` for installing Web Dependencies.
-
 
 ## Start the server & preview
 Run `grunt serve` to create a local, Node-based http server on localhost:9000, and launch your newly scaffolded application in a new tab.
@@ -136,3 +69,18 @@ Running `grunt`. The default task will create a production version of our applic
 
 ## Delivery Pipeline Service
 More notes about the Delivery Pipeline Service is located in the Application itself on the DeliveryPipeline-page, http://localhost:9000/#/howto
+
+-------
+
+##Toolchain Integration
+The Delivery Pipeline Service on Bluemix is using Slack for notifications and Sauce Labs for e2e tests/Selenium integration or acceptance tests, therefore accounts and access keys/tokens is needed.
+
+### Slack
+Create an account on https://slack.com/
+Generate OAuth Token https://api.slack.com/docs/oauth-test-tokens
+
+### Sauce Labs
+Create an account on https://saucelabs.com/
+Get your Access Key https://saucelabs.com/beta/user-settings
+
+Note: Access Key/OAuth Token and usernames will be needed in the setup of the application.
