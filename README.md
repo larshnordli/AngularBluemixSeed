@@ -6,7 +6,7 @@ A Angular Seed application on Bluemix, with a pre-configured Delivery Pipeline.
 1. **Log in to Bluemix and ensure that you are in the organization and space you wish to locate your app.**. There is no way to choose the organization or space in the Toolchain creation step, so this has to be done on beforehand
 2. Ensure that you have at least one Toolchain space availble in your space
 3. Ensure that your Bluemix account is connected to and authorized to control your GitHub account. *The Toolchain will automatically create a repository on your account*
-4. Be aware that all GitHub repos that are made will automatically be made **public**. If you want to hide your code base, or if your working under a client agreement to keep information confidential, remember to change the newly created repo to public **before** your initial commit
+4. Be aware that all GitHub repos that are made will automatically be made **public**. If you want to hide your code base, or if your working under a client agreement to keep information confidential, remember to change the newly created repo to private **before** your initial commit
 
 ## Get Started
 A Angular Seed application on Bluemix, with a pre-configured Delivery Pipeline.
