@@ -18,7 +18,7 @@ sample-repo:
     repo_name: "{{name}}"
     repo_url: https://github.com/larshnordli/AngularBluemixSeed
     type: clone
-    has_issues: true
+    has_issues: false
 
 # Pipelines
 sample-build:
@@ -41,8 +41,8 @@ sample-build:
 
 
 #Web IDE
-webide:
-  service_id: orion
+#webide:
+  #service_id: orion
 
 #Deployment
 deploy:
