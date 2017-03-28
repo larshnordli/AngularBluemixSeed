@@ -17,7 +17,7 @@ Press this button, to get your own copy of the sample running in Bluemix! It clo
 
 **Before you click this button**, read the Prerequisites. Also be aware that the name of your toolchain will be reflected in the app name and GitHub Repository that Bluemix creates for you.
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/larshnordli/AngularBluemixSeed)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/devops/setup/deploy/?repository=https://github.com/larshnordli/AngularBluemixSeed)
 
 ## Walkthrough
 1. When you click the **Deploy to Bluemix**-button, you will be taken to Bluemix's Create Toolchain page. The name you choose here will be the name of several things:
